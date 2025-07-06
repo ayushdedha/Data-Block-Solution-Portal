@@ -36,7 +36,6 @@ export const loginUserLogic = async(userData)=>{
         const user = rows[0];
 
         const passwordMatch = await bcrypt.compare(userData.password, user.password);
-
         if(!passwordMatch){
             return {success: false, message: "Invalid Credentials!"};
         }
@@ -46,6 +45,7 @@ export const loginUserLogic = async(userData)=>{
             process.env.JWT_SECRET,
             {expiresIn:'3h'}
         );
+        
         return {success: true, message: "Login Successfull" , token};
     } catch (error) {
         console.log(error);

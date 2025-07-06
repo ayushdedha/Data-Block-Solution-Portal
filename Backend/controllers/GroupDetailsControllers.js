@@ -1,8 +1,6 @@
 import { GroupDetailsModels } from "../models/GroupDetailsModels.js";
 import { getGroupDetailsLogic, postGroupDetailsLogic, updateGroupDetailsLogic , deleteGroupDetailsLogic } from "../services/GroupDetailsServices.js";
 
-
-//get group
 export const getGroupDetails = async(req,res)=>{
     try {
         let response = await getGroupDetailsLogic();
@@ -13,16 +11,15 @@ export const getGroupDetails = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({success:false,message:"Internal Server Error!!"});
+        return res.status(500).json({success:false,message:"Internal Server Error!"});
     }
 }
 
-//post group
 export const postGroupDetails = async(req,res)=>{
     const { name } = req.body;
     
     if(!name){
-        return res.status(400).json({success:false,message:"All fields required"});
+        return res.status(400).json({success:false,message:"All fields required!"});
     }
     
     const groupData = new GroupDetailsModels({name});
@@ -36,11 +33,10 @@ export const postGroupDetails = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({success:false,message:"Internal server error"});
+        return res.status(500).json({success:false,message:"Internal server error!"});
     }
 }
 
-//put group
 export const updateGroupDetails = async(req,res)=>{
     const groupId = req.params.id;
     const {name} = req.body;
@@ -48,7 +44,7 @@ export const updateGroupDetails = async(req,res)=>{
     const groupData = new GroupDetailsModels({name});
 
     if(!groupId){
-        return res.status(400).json({success:false,message:"Id not found"});
+        return res.status(400).json({success:false,message:"Id not found!"});
     }
     
     try {
@@ -64,12 +60,11 @@ export const updateGroupDetails = async(req,res)=>{
     }
 }
 
-//delete group
 export const deleteGroupDetails = async(req,res)=>{
-    const {id} =req.params;    
+    const {id} = req.params;    
 
     if(!id){
-        return res.status(400).json({success:false,message:"Id required"});
+        return res.status(400).json({success:false,message:"Id not found!"});
     }
 
     try {
@@ -81,6 +76,6 @@ export const deleteGroupDetails = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({success:false,message:"Internal Server error"});
+        return res.status(500).json({success:false,message:"Internal Server error!"});
     }
 }

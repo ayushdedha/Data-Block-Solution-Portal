@@ -44,10 +44,10 @@ const createTable = async(tableName, query)=>{
 
 const createAllTables = async()=>{
     try {
-        await createTable("users",users);
-        await createTable("groupDetails",groupDetails);
-        await createTable("policy",policy);
-        await createTable("devices",devices);
+        await createTable("Users",users);
+        await createTable("GroupDetails",groupDetails);
+        await createTable("Policy",policy);
+        await createTable("Devices",devices);
     } catch (error) {
         console.log(error);
     }

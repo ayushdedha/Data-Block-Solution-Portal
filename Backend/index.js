@@ -3,9 +3,9 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import helmet from 'helmet'
 import { rateLimit } from 'express-rate-limit'
-import { checkConnection } from './config/Database.js';
+import { checkConnection } from './config/Database.js'
 import createAllTables from './utils/CreateTables.js'
-// import { authMiddleware } from './middleware/AuthMiddlewares.js'
+import { authMiddleware } from './middleware/AuthMiddlewares.js'
 import UsersRoutes from './routes/UsersRoutes.js'
 import GroupDetailsRoutes from './routes/GroupDetailsRoutes.js'
 import DevicesRoutes from './routes/DevicesRoutes.js'
@@ -25,12 +25,10 @@ const limiter = rateLimit({
 });
 app.use(limiter);
 
-//users routes
 app.use('/api/user', UsersRoutes);
 
 // app.use(authMiddleware);
 
-//others routes
 app.use('/api/group',GroupDetailsRoutes);
 app.use('/api/device',DevicesRoutes);
 
@@ -39,7 +37,7 @@ app.use((req,res,next)=>{
 });
 
 app.use((err,req,res,next)=>{
-    console.error(err);
+    console.error(err.stack); //err ki jagah err.stack aayega
     return res.status(500).json({message:"Internal Server Error!"});
 });
 

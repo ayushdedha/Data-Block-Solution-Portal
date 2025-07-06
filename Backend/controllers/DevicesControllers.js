@@ -1,7 +1,6 @@
 import { DevicesModels } from '../models/DevicesModels.js'
 import { getDevicesLogic, postDevicesLogic, deleteDevicesLogic } from '../services/DevicesServices.js'
 
-//get device
 export const getDevices = async(req,res)=>{
     try {
         let response = await getDevicesLogic();
@@ -12,16 +11,15 @@ export const getDevices = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({success:false,message:"Internal Server Error!!"});
+        return res.status(500).json({success:false,message:"Internal Server Error!"});
     }
 }
 
-//post device
 export const postDevices = async(req,res)=>{
     const { device_name, os, mac_address, ip_address } = req.body;
     
     if(!device_name || !mac_address || !ip_address){
-        return res.status(400).json({success:false,message:"All fields required"});
+        return res.status(400).json({success:false,message:"Fill all the required fields!"});
     }
     
     const deviceData = new DevicesModels({device_name, os,  mac_address, ip_address});
@@ -35,16 +33,15 @@ export const postDevices = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({success:false,message:"Internal server error"});
+        return res.status(500).json({success:false,message:"Internal Server Error!"});
     }
 }
 
-//delete device
 export const deleteDevices = async(req,res)=>{
-    const {id} =req.params;    
+    const {id} = req.params;
 
     if(!id){
-        return res.status(400).json({success:false,message:"Id required"});
+        return res.status(400).json({success:false,message:"DeviceId required!"});
     }
 
     try {
@@ -56,6 +53,6 @@ export const deleteDevices = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({success:false,message:"Internal Server error"});
+        return res.status(500).json({success:false,message:"Internal Server Error!"});
     }
 }
