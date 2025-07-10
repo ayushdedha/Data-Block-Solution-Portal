@@ -28,7 +28,7 @@ app.use(limiter);
 
 app.use('/api/user', UsersRoutes);
 
-// app.use(authMiddleware);
+app.use(authMiddleware);
 
 app.use('/api/group',GroupDetailsRoutes);
 app.use('/api/device',DevicesRoutes);
@@ -39,7 +39,7 @@ app.use((req,res,next)=>{
 });
 
 app.use((err,req,res,next)=>{
-    console.error(err.stack); //err ki jagah err.stack aayega
+    console.error(err.stack);
     return res.status(500).json({message:"Internal Server Error!"});
 });
 

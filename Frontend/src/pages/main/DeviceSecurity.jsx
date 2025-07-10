@@ -2,7 +2,7 @@ import React from 'react'
 
 const DeviceSecurity = () => {
   return (
-    <div>DeviceSecurity</div>
+    <div className=''>DeviceSecurity</div>
   )
 }
 

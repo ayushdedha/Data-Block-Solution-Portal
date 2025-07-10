@@ -4,7 +4,7 @@ import Swal from 'sweetalert2'
 let isAlertShown = false;
 
 const API = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: import.meta.env.VITE_API_BASE_URL
 });
 
 // Request interceptor to attach token
