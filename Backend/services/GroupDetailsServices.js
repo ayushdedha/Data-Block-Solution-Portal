@@ -11,16 +11,19 @@ export const getGroupDetailsLogic = async()=>{
     }
 };
 
+//post group
 export const postGroupDetailsLogic = async(groupData)=>{
     try {
         const query = `INSERT INTO groupDetails (name) VALUES (?);`;
         const values = [groupData.name];
-        await pool.query(query,values);
+        let [rows] = await pool.query(query,values);
 
-        return {success:true,message:"Data saved successfully!"};
+        await pool.query(`INSERT INTO policy (groupId, print,usb, mtp, bluetooth, file_upload, clipboard) VALUES (?,true,true,true,true,true,true)`,[rows.insertId]);
+        
+        return {success:true,message:"Data save successfully"};
     } catch (error) {
         console.log(error);
-        return {success:false,message:"Data not saved!"};
+        return {success:false,message:"Data not saved"};
     }
 }
 

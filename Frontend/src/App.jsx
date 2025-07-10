@@ -1,33 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {Routes, Route} from 'react-router-dom'
+import Login from './pages/authentication/Login.jsx'
+import Policy from './pages/main/policy/Policy.jsx'
+import Devices from './pages/main/Devices.jsx'
+import DeviceSecurity from './pages/main/DeviceSecurity.jsx'
+import NavigationBar from './components/NavigationBar.jsx'
+import {useLocation} from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const location = useLocation();
+  const hideNavigationBar = ['/','/login'];
 
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      {!hideNavigationBar.includes(location.pathname)&&<NavigationBar/>}
+
+      <Routes>
+        {/* Authentication routes */}
+        <Route path='/' element={<Login />}/>
+        <Route path='/login' element={<Login />}/>
+
+        {/* main pages routes */}
+        <Route path='/policy' element={<Policy />}/>
+        <Route path='/devices' element={<Devices />}/>
+        <Route path='/device-security' element={<DeviceSecurity />}/>
+      </Routes>
     </>
   )
 }

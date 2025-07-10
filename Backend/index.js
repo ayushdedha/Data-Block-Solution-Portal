@@ -9,6 +9,7 @@ import { authMiddleware } from './middleware/AuthMiddlewares.js'
 import UsersRoutes from './routes/UsersRoutes.js'
 import GroupDetailsRoutes from './routes/GroupDetailsRoutes.js'
 import DevicesRoutes from './routes/DevicesRoutes.js'
+import PolicyRoutes from './routes/PolicyRoutes.js'
 
 dotenv.config();
 
@@ -31,6 +32,7 @@ app.use('/api/user', UsersRoutes);
 
 app.use('/api/group',GroupDetailsRoutes);
 app.use('/api/device',DevicesRoutes);
+app.use('/api/policy', PolicyRoutes);
 
 app.use((req,res,next)=>{
     return res.status(404).json("Route not found");
