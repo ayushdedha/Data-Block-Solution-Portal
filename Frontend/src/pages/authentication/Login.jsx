@@ -17,10 +17,10 @@ const Login = () => {
         email,
         password
       });
-      // Jab hame ui m data update nhi krna hota to direct data response m hi likh dete h alag se object banane ke bajaye
 
       let token = response.data.token;
       sessionStorage.setItem('AuthToken', token);
+      sessionStorage.setItem('isAuthenticated', true);
       
       toast.success(`Successfully logged in`);
       navigate('/device-security');
