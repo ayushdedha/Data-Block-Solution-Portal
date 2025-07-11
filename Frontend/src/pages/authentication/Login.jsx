@@ -12,19 +12,18 @@ const Login = () => {
   const handleLogin = async (e)=>{
     e.preventDefault(e);
     
-    let userData = {
-      email,
-      password
-    };
     try {
-      let response = await API.post('/user/login',userData);
+      let response = await API.post('/user/login', {
+        email,
+        password
+      });
+      // Jab hame ui m data update nhi krna hota to direct data response m hi likh dete h alag se object banane ke bajaye
 
       let token = response.data.token;
-      sessionStorage.setItem('AuthToken',token);
+      sessionStorage.setItem('AuthToken', token);
       
-      toast.success(`Login Successfully`);
+      toast.success(`Successfully logged in`);
       navigate('/device-security');
-      
     } catch (error) {
       console.log(error);
       toast.error(`Login Failed!`);

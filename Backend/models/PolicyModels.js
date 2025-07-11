@@ -1,5 +1,6 @@
 export class PolicyModels {
     constructor(policyData) {
+        this.policyId = policyData.policyId;
         this.print = policyData.print;
         this.usb = policyData.usb;
         this.mtp = policyData.mtp;

@@ -1,8 +1,7 @@
 import { getPolicyLogic, updatePolicyLogic } from "../services/PolicyServices.js"
 import { PolicyModels } from '../models/PolicyModels.js'
 
-//get policy
-export const getPolicy = async(req,res)=>{
+export const getPolicy = async (req, res)=>{
     try {
         let response = await getPolicyLogic();
         if(response.success){
@@ -12,22 +11,22 @@ export const getPolicy = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({success:false,message:"Internal Server Error!!"});
+        return res.status(500).json({success: false, message: "Internal Server Error!"});
     }
 }
 
-//update policy
 export const updatePolicy = async(req,res)=>{
     const policyId = req.params.id;
-    const {print,usb,mtp,bluetooth,file_upload,clipboard,app_blacklisting} = req.body;
+    const {print, usb, mtp, bluetooth, file_upload, clipboard, app_blacklisting} = req.body;
 
-    const policyData = new PolicyModels({print,usb,mtp,bluetooth,file_upload,clipboard,app_blacklisting});
     if(!policyId){
-        return res.status(400).json({success:false,message:"Id not found"});
+        return res.status(400).json({success: false, message: "Id not found!"});
     }
 
+    const policyData = new PolicyModels({policyId, print, usb, mtp, bluetooth, file_upload, clipboard,app_blacklisting});  // This line come after if condition
+
     try {
-        let response = await updatePolicyLogic(policyId,policyData);
+        let response = await updatePolicyLogic(policyData);
         if(response.success){
             return res.status(200).json(response);
         }else{
@@ -35,6 +34,6 @@ export const updatePolicy = async(req,res)=>{
         }
     } catch (error) {
         console.log(error);
-        return res.status(500).json({status:false,message:"Internal server error!"});
+        return res.status(500).json({status: false, message: "Internal Server Error!"});
     }
 }
