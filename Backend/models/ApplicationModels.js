@@ -1,4 +1,4 @@
-export class DevicesModels {
+export class ApplicationModels {
     constructor(deviceData) {
         this.device_name = deviceData.device_name;
         this.os = deviceData.os;

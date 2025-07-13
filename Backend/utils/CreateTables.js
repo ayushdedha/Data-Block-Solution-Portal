@@ -27,6 +27,7 @@ const policy = `CREATE TABLE IF NOT EXISTS policy(
 
 const devices = `CREATE TABLE IF NOT EXISTS devices(
     deviceId INT AUTO_INCREMENT PRIMARY KEY,
+    groupId INT NOT NULL,
     device_name VARCHAR(50) NOT NULL,
     os VARCHAR(50) NOT NULL,
     mac_address VARCHAR(50) UNIQUE NOT NULL,

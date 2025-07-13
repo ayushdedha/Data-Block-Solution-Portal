@@ -3,10 +3,11 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import helmet from 'helmet'
 import { rateLimit } from 'express-rate-limit'
+import { authMiddleware } from './middleware/AuthMiddlewares.js'
 import { checkConnection } from './config/Database.js'
 import createAllTables from './utils/CreateTables.js'
-import { authMiddleware } from './middleware/AuthMiddlewares.js'
 import UsersRoutes from './routes/UsersRoutes.js'
+import ApplicationRoutes from './routes/ApplicationRoutes.js'
 import GroupDetailsRoutes from './routes/GroupDetailsRoutes.js'
 import DevicesRoutes from './routes/DevicesRoutes.js'
 import PolicyRoutes from './routes/PolicyRoutes.js'
@@ -27,6 +28,7 @@ const limiter = rateLimit({
 app.use(limiter);
 
 app.use('/api/user', UsersRoutes);
+app.use('/api/config', ApplicationRoutes);
 
 app.use(authMiddleware);
 
